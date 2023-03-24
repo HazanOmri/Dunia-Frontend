@@ -1,0 +1,63 @@
+.item-preview-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 9px 0 rgb(0 0 0 / 10%);
+    padding-bottom: 5px;
+    height: max-content;
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        z-index: 99;
+    }
+
+    svg {
+        display: flex;
+        position: absolute;
+        opacity: 0.65;
+
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+    .like svg {
+        margin: 15px;
+    }
+
+    .delete svg {
+        margin: 15px -35px;
+    }
+
+    .item-preview {
+
+        span {
+            font-size: 12px;
+        }
+
+        .description {
+            margin-inline: 5px;
+        }
+
+        .price {
+            color: $price;
+            font-weight: bolder;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .qty {
+            margin-inline-start: 8px;
+            cursor: pointer;
+        }
+    }
+
+    .img-container:hover {
+        cursor: pointer;
+    }
+}

@@ -1,4 +1,6 @@
 import { httpService } from './http.service'
+import { itemService } from './item.service'
+import { utilService } from './util.service'
 
 const AUTH_URL = 'auth/'
 const USER_URL = 'user/'
@@ -14,8 +16,9 @@ export const userService = {
     getUsers,
     update,
     getEmptyCredentials,
-    updateLikeSong,
-    updateLikeStation
+    getEmptyUser,
+    getLiked,
+    getCart,
 }
 
 window.userService = userService
@@ -69,28 +72,28 @@ function getEmptyCredentials() {
     }
 }
 
-async function updateLikeSong(song) {
-    const user = getLoggedinUser()
-    const isAdd = !user.likedSongs.find(({ id }) => id === song.id)
-    if (isAdd) user.likedSongs.push(song)
-    else user.likedSongs = user.likedSongs.filter(({ id }) => id !== song.id)
-    const updatedUser = await update(user)
-    return updatedUser
+function getEmptyUser() {
+    return { id: utilService.makeId(), liked: [], cart: {} }
 }
 
-async function updateLikeStation(currStation) {
-    const user = getLoggedinUser()
-    const { _id, name, imgUrl, songs, description } = currStation
-    const station = {
-        _id,
-        name,
-        imgUrl,
-        songs,
-        description
+async function getLiked() {
+    const likedIds = getLoggedinUser().liked
+    let liked = []
+    for (let i = 0; i < likedIds.length; i++) {
+        const item = await itemService.get(likedIds[i])
+        liked.push(item)
     }
-    const isAdd = !user.likedStations.find(({ _id }) => _id === station._id)
-    if (isAdd) user.likedStations.push(station)
-    else user.likedStations = user.likedStations.filter(({ _id }) => _id !== station._id)
-    const updatedUser = await update(user)
-    return updatedUser
+    return liked
+}
+
+async function getCart() {
+    const cart = getLoggedinUser().cart
+    let items = []
+    let sum = 0
+    for (const id in cart) {
+        const item = await itemService.get(id)
+        items.push(item)
+        sum += item.price * cart[id]
+    }
+    return { items, sum }
 }

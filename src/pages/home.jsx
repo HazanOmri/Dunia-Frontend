@@ -1,9 +1,60 @@
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { itemService } from '../services/item.service'
+
+import { ItemList } from '../cmps/item-list'
+import { setUser } from '../store/user.action'
+import { userService } from '../services/user.service'
+import { setFilter } from '../store/item.action'
 
 export function Home() {
-    const user = useSelector(storeState => storeState.userModule.user)
+    // const user = useSelector(storeState => storeState.userModule.user)
+    const filter = useSelector(storeState => storeState.itemModule.filter)
+    const [items, setItems] = useState([])
+
+    useEffect(() => {
+        loadUser()
+        loadItems()
+    }, [filter])
+
+    async function loadItems() {
+        const serviceItems = await itemService.query(filter)
+        setItems(serviceItems)
+    }
+
+    function loadUser() {
+        const user = userService.getLoggedinUser()
+        if (user) setUser(user)
+        else setUser(userService.getEmptyUser())
+    }
+
+    function handleChange({ target }) {
+        setFilter({ ...filter, price: +target.value })
+    }
 
     return <section className="home">
-        <h1>Hello from {user.name}</h1>
+        <div className="actions">
+            <ul>
+                <li>רביעייה</li>
+                <li>תשיעייה</li>
+            </ul>
+            <div>
+                <div className="price-range">
+                    <p><span>₪</span>{filter.price}</p>
+                    <p><span>₪</span>25</p>
+                </div >
+                <input
+                    type="range"
+                    id="price"
+                    value={filter.price}
+                    onChange={handleChange}
+                    min={25}
+                    max={500}
+                    title={"₪" + filter.price}
+                />
+            </div>
+        </div>
+        <ItemList items={items} />
     </section>
 }

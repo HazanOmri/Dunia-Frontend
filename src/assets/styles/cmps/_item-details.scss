@@ -1,0 +1,44 @@
+.item-details {
+    display: flex;
+    justify-self: center;
+    max-width: 960px;
+    justify-self: center;
+
+    .img-container {
+        display: flex;
+        height: 76vh;
+        padding-inline-end: 40px;
+        min-width: 50%;
+    }
+
+    .actions {
+        margin: 20px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        button {
+            @include button;
+        }
+
+        .cta {
+            @include button;
+            background-color: $cta;
+            color: $clr1;
+            padding: 15px 40px;
+        }
+
+        .cta:hover {
+            background-color: darken($cta, 10%);
+        }
+    }
+
+    svg {
+        opacity: 0.65;
+
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}

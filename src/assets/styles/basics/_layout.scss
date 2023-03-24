@@ -1,0 +1,18 @@
+.main-app {
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+    direction: rtl;
+
+    >*:not(.full) {
+        grid-column: 2;
+    }
+
+    .full {
+        grid-column: 1/-1;
+    }
+}
+
+main{
+    padding-top: 74px;
+    min-height: 88.4vh;
+}

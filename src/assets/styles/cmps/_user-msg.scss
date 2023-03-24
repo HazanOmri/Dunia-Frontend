@@ -1,0 +1,36 @@
+.user-msg {
+    background-color: rgb(64, 109, 222); //צבע טוב לליק, להוסיך צבע אפרפר לאנלייק
+    display: flex;
+    justify-content: center;
+    padding: .7em 1em;
+    font-size: 1.1em;
+    border-radius: 2px;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    color: $clr1;
+    font-size: 14px;
+}
+
+.user-msg.error {
+    background-color: rgb(206, 46, 46);
+}
+
+.user-msg button {
+    float: right;
+    margin: 1em;
+}
+
+.user-msg.add-item {
+    background-color: $cta;
+}
+
+.user-msg.like-item {
+    background-color: rgb(64, 109, 222);
+}
+
+.user-msg.remove-item,
+.user-msg.unlike-item {
+    background-color: darken($clr1, 10%);
+    color: black;
+}

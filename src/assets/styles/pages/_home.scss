@@ -1,0 +1,34 @@
+.home {
+    .qty-label {
+        display: none;
+    }
+
+    .qty {
+        display: none;
+    }
+
+    .delete {
+        display: none;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .price-range {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            font-size: 12px;
+        }
+    }
+
+    input {
+        direction: ltr;
+        width: 270px;
+        padding-right: 3px;
+        height: 10px;
+    }
+}

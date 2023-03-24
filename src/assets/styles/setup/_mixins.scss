@@ -1,0 +1,12 @@
+@mixin button {
+    background-color: darken($clr1, 7%);
+    padding: 15px 10px;
+    border: none;
+    border-radius: 1px;
+    font-size: 1rem;
+
+    &:hover {
+        cursor: pointer;
+        background-color: darken($clr1, 20%);
+    }
+}
