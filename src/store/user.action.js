@@ -34,7 +34,7 @@ export async function addToCart(itemId) {
     }
 }
 
-export async function changeAnount(itemId, qty) {
+export async function changeAmount(itemId, qty) {
     try {
         store.dispatch({ type: ADD_TO_CART, itemId, qty })
     } catch (err) {

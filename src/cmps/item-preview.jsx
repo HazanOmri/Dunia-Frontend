@@ -1,8 +1,7 @@
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import photo from '../assets/imgs/3.jpeg'
-import { toggleLike, removeFromCart, addToCart, changeAnount } from '../store/user.action'
+import { toggleLike, removeFromCart, changeAmount } from '../store/user.action'
 
 export function ItemPreview({ item }) {
     const navigate = useNavigate()
@@ -17,8 +16,8 @@ export function ItemPreview({ item }) {
         }
     }
 
-    function onChangeAnount(itemId, { target }) {
-        changeAnount(itemId, +target.value)
+    function onChangeAmount(itemId, { target }) {
+        changeAmount(itemId, +target.value)
     }
 
     return <section className="item-preview-container">
@@ -35,14 +34,14 @@ export function ItemPreview({ item }) {
                 </div>
             </div>
             <div className="img-container" onClick={() => navigate(`/details/${item._id}`)}>
-                <img src={photo} />
+                <img src={item.imgUrl ? item.imgUrl : photo} />
             </div>
             <div className="description">
                 <p>{item.name}</p>
                 <div className="details">
                     <p className="price">מחיר: <span>₪</span>{item.price}</p>
                     <label className="qty-label" htmlFor="qty">כמות:
-                        <select name="qty" id="qty" className="qty" value={user.cart[item._id]} onChange={(ev) => onChangeAnount(item._id, ev)}>
+                        <select name="qty" id="qty" className="qty" value={user.cart[item._id]} onChange={(ev) => onChangeAmount(item._id, ev)}>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>

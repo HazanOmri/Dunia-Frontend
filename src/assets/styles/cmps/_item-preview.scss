@@ -57,7 +57,11 @@
         }
     }
 
-    .img-container:hover {
-        cursor: pointer;
+    .img-container {
+        height: 300px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

@@ -7,6 +7,7 @@ import { ItemList } from '../cmps/item-list'
 import { setUser } from '../store/user.action'
 import { userService } from '../services/user.service'
 import { setFilter } from '../store/item.action'
+import { Link } from 'react-router-dom'
 
 export function Home() {
     // const user = useSelector(storeState => storeState.userModule.user)
@@ -20,6 +21,7 @@ export function Home() {
 
     async function loadItems() {
         const serviceItems = await itemService.query(filter)
+        console.log('serviceItems', serviceItems)
         setItems(serviceItems)
     }
 
@@ -35,10 +37,8 @@ export function Home() {
 
     return <section className="home">
         <div className="actions">
-            <ul>
-                <li>רביעייה</li>
-                <li>תשיעייה</li>
-            </ul>
+            {/*להוסיף בדיקה האם מנהל ויכול להוסיף מוצר */}
+            <Link to={"/edit/"}>הוסף מוצר</Link>
             <div>
                 <div className="price-range">
                     <p><span>₪</span>{filter.price}</p>
