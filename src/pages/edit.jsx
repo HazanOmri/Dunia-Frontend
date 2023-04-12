@@ -23,10 +23,11 @@ export function Edit() {
     async function loadItem() {
         try {
             const newItem = await itemService.get(params.id)
-            const { name, desctiption, price, imgUrl } = newItem
+            console.log('newItem', newItem)
+            const { name, description, price, imgUrl } = newItem
             setItem(newItem)
             setItemName(name)
-            setItemDescription(desctiption)
+            setItemDescription(description)
             setItemPrice(+price)
             setItemImg(imgUrl)
         } catch (err) {
@@ -60,7 +61,7 @@ export function Edit() {
             _id: item._id,
             name: itemName,
             imgUrl: itemImg,
-            desctiption: itemDescription,
+            description: itemDescription,
             price: itemPrice,
             // categories: itemCategories
         }
@@ -81,48 +82,44 @@ export function Edit() {
         }
     }
 
-    return <section className="acount">
-        <div className="add-item">
-            <div className="header">
-                <h1>ערוך פרטי מוצר</h1>
+    return <section className="edit">
+        <h1>ערוך פרטי מוצר</h1>
+        <div className="edit-container">
+            <div className="input-img-container">
+                <img src={itemImg ? itemImg : defaultPhoto} />
+                <input type="file" onChange={onUploadImg} />
             </div>
-            <div className="edit-container">
-                <div className="input-img-container">
-                    <img src={itemImg ? itemImg : defaultPhoto} />
-                    <input type="file" onChange={onUploadImg} />
-                </div>
-                <form className="text-input">
-                    <input type="text"
-                        name="name"
-                        className="input-title"
-                        placeholder="שם הפריט"
-                        value={itemName}
-                        onChange={onChangeName}
-                    />
-                    <textarea name="description"
-                        className="input-desc"
-                        placeholder="הכנס תיאור פריט"
-                        value={itemDescription}
-                        onChange={onChangeDescription}
-                    />
-                    {/* <input type="text"
+            <form className="text-input">
+                <input type="text"
+                    name="name"
+                    className="input-title"
+                    placeholder="שם הפריט"
+                    value={itemName}
+                    onChange={onChangeName}
+                />
+                <textarea name="description"
+                    className="input-desc"
+                    placeholder="הכנס תיאור פריט"
+                    value={itemDescription}
+                    onChange={onChangeDescription}
+                />
+                {/* <input type="text"
                         name="category"
                         placeholder="שייך לקטגוריה"
                         value={item.categories}
                         onChange={() => console.log('change')}
                     /> */}
-                    <input type="number"
-                        name="price"
-                        placeholder="הכנס מחיר"
-                        value={itemPrice}
-                        onChange={onChangePrice}
-                    />
-                </form>
-            </div>
-            <div className="actions">
-                <button className="save" onClick={onSave}>שמור</button>
-                <button className="delete" onClick={onDelete}>מחק</button>
-            </div>
+                <input type="number"
+                    name="price"
+                    placeholder="הכנס מחיר"
+                    value={itemPrice}
+                    onChange={onChangePrice}
+                />
+            </form>
+        </div>
+        <div className="actions">
+            <button className="save" onClick={onSave}>שמור</button>
+            <button className="delete" onClick={onDelete}>מחק</button>
         </div>
     </section>
 }

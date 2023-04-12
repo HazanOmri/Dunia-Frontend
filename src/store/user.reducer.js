@@ -10,12 +10,12 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 const initialState = {
-    user: { id: '', liked: [], cart: {} },
+    user: { id: '',fullname:'', liked: [], cart: {} },
 }
 
 export function userReducer(state = initialState, action) {
     let user = { ...state.user }
-    // console.log('user', user)
+    console.log('user', user)
     switch (action.type) {
         case SET_USER:
             userService.saveLocalUser(action.user)

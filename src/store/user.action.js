@@ -1,7 +1,30 @@
 import { ADD_TO_CART, LIKE_ITEM, REMOVE_FROM_CART, SET_USER, UNLIKE_ITEM } from './user.reducer.js'
 import { store } from './store.js'
 import { showAddItemMsg, showLikeMsg, showUnlikeMsg } from '../services/event-bus.service.js'
+import { userService } from '../services/user.service.js'
 
+
+export async function login(credentials) {
+    try {
+        const user = await userService.login(credentials)
+        store.dispatch({ type: SET_USER, user })
+        return user
+    } catch (err) {
+        console.error('Cannot login:', err)
+        throw err
+    }
+}
+
+export async function signup(credentials) {
+    try {
+        const user = await userService.signup(credentials)
+        store.dispatch({ type: SET_USER, user: { ...user, username: credentials.username } })
+        return user
+    } catch (err) {
+        console.error('Cannot signup:', err)
+        throw err
+    }
+}
 
 export async function setUser(user) {
     try {

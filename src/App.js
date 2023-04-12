@@ -11,6 +11,7 @@ import { AppHeader } from './cmps/app-header.jsx'
 import { AppFooter } from './cmps/app-footer.jsx'
 import { ItemDetails } from './cmps/item-details.jsx'
 import { UserMsg } from './cmps/user-msg'
+import { LoginSignup } from './pages/login-signup'
 
 
 export function App() {
@@ -27,6 +28,7 @@ export function App() {
             <Route element={<Cart />} path='/cart' />
             <Route element={<Edit />} path='/edit/:id' />
             <Route element={<Edit />} path='/edit' />
+            <Route element={<LoginSignup />} path='/loginSingup' />
           </Routes>
           <UserMsg />
         </main>

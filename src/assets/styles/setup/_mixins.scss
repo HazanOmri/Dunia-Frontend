@@ -10,3 +10,17 @@
         background-color: darken($clr1, 20%);
     }
 }
+
+@mixin admin-button {
+    background-color: #00acac;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 1px;
+    font-size: 1rem;
+    color: $clr1;
+
+    &:hover {
+        cursor: pointer;
+        background-color: darken(#00acac, 10%);
+    }
+}

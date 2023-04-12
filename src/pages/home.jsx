@@ -10,7 +10,7 @@ import { setFilter } from '../store/item.action'
 import { Link } from 'react-router-dom'
 
 export function Home() {
-    // const user = useSelector(storeState => storeState.userModule.user)
+    const user = useSelector(storeState => storeState.userModule.user)
     const filter = useSelector(storeState => storeState.itemModule.filter)
     const [items, setItems] = useState([])
 
@@ -37,8 +37,7 @@ export function Home() {
 
     return <section className="home">
         <div className="actions">
-            {/*להוסיף בדיקה האם מנהל ויכול להוסיף מוצר */}
-            <Link to={"/edit/"}>הוסף מוצר</Link>
+            {user.username === 'עדי חזן' ? <Link to={"/edit/"}>הוסף מוצר</Link> : <h1></h1>}
             <div>
                 <div className="price-range">
                     <p><span>₪</span>{filter.price}</p>

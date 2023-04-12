@@ -37,8 +37,8 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-    userCred.likedSongs = []
-    userCred.likedStations = []
+    userCred.cart = {}
+    userCred.liked = []
     const user = await httpService.post(AUTH_URL + 'signup', userCred)
     return saveLocalUser(user)
 }
@@ -73,7 +73,7 @@ function getEmptyCredentials() {
 }
 
 function getEmptyUser() {
-    return { id: utilService.makeId(), liked: [], cart: {} }
+    return { id: utilService.makeId(), fullname: '', liked: [], cart: {} }
 }
 
 async function getLiked() {
