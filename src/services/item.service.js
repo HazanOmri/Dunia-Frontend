@@ -1,8 +1,8 @@
-import { utilService } from './util.service.js'
-import { storageService } from './async-storage.service.js'
+// import { utilService } from './util.service.js'
+// import { storageService } from './async-storage.service.js'
 import { httpService } from './http.service.js'
 
-const ITEM_KEY = 'itemDB'
+// const ITEM_KEY = 'itemDB'
 const ITEM_URL = 'item/'
 
 // _createItems()
@@ -17,16 +17,14 @@ export const itemService = {
 
 async function query(filterBy = getEmptyFilter()) {
   try {
-    // let items = await storageService.query(ITEM_KEY)
     let items = await httpService.get(ITEM_URL)
-    console.log(items)
-    // if (filterBy.name) {
-    //   const regex = new RegExp(filterBy.name, 'i')
-    //   items = items.filter(item => regex.test(item.name))
-    // }
-    // if (filterBy.price) {
-    //   items = items.filter(item => item.price < filterBy.price)
-    // }
+    if (filterBy.name) {
+      const regex = new RegExp(filterBy.name, 'i')
+      items = items.filter(item => regex.test(item.name))
+    }
+    if (filterBy.price) {
+      items = items.filter(item => item.price < filterBy.price)
+    }
     return items
   } catch (err) {
     throw err
@@ -34,12 +32,11 @@ async function query(filterBy = getEmptyFilter()) {
 }
 
 function getEmptyFilter() {
-  return { name: '', price: 500 }
+  return { name: '', price: 1000 }
 }
 
-function get(itemId) {
+async function get(itemId) {
   return httpService.get(ITEM_URL + itemId)
-  // return storageService.get(ITEM_KEY, itemId)
 }
 
 function remove(itemId) {

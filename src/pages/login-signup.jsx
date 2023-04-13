@@ -17,7 +17,6 @@ export function LoginSignup() {
     useEffect(() => {
         if (signupState === 'loginState') setIsSignupState(false)
         else if (signupState === 'signupState') setIsSignupState(true)
-        console.log('user', user)
     }, [signupState])
 
     function onToggleSignupState(ev) {

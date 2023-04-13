@@ -19,6 +19,7 @@ export const userService = {
     getEmptyUser,
     getLiked,
     getCart,
+    updateUsers,
 }
 
 window.userService = userService
@@ -80,8 +81,12 @@ async function getLiked() {
     const likedIds = getLoggedinUser().liked
     let liked = []
     for (let i = 0; i < likedIds.length; i++) {
-        const item = await itemService.get(likedIds[i])
-        liked.push(item)
+        try {
+            const item = await itemService.get(likedIds[i])
+            liked.push(item)
+        } catch (err) {
+            console.log(`Cant find item with id ${likedIds[i]}`, err)
+        }
     }
     return liked
 }
@@ -96,4 +101,20 @@ async function getCart() {
         sum += item.price * cart[id]
     }
     return { items, sum }
+}
+
+async function updateUsers(removedItemId) {
+    const users = await getUsers()
+    users.forEach(user => {
+        console.log('orinting all useres', user)
+        if (user.liked.includes(removedItemId)) {
+            const newLiked = user.liked.filter(likedId => likedId !== removedItemId)
+            console.log('new user:', { ...user, liked: newLiked })
+            update({ ...user, liked: newLiked })
+        }
+        if (user.cart[removedItemId]) {
+            delete user.cart[removedItemId]
+            update({ ...user })
+        }
+    })
 }

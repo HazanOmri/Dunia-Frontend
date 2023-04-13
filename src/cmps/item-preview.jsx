@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import photo from '../assets/imgs/3.jpeg'
+import { userService } from '../services/user.service'
 import { toggleLike, removeFromCart, changeAmount } from '../store/user.action'
 
 export function ItemPreview({ item }) {
@@ -9,9 +10,16 @@ export function ItemPreview({ item }) {
 
     function onToggleLike(ev) {
         ev.stopPropagation()
+        let newLiked = [...user.liked]
+        console.log('user.liked', user.liked)
         if (user.liked.includes(item._id)) {
+            newLiked = newLiked.filter(likedId => likedId !== item._id)
+            console.log('newLiked', newLiked)
+            userService.update({ ...user, liked: newLiked })
             toggleLike(item._id, true)
         } else {
+            newLiked.push(item._id)
+            userService.update({ ...user, liked: newLiked })
             toggleLike(item._id, false)
         }
     }
@@ -39,7 +47,7 @@ export function ItemPreview({ item }) {
             <div className="description">
                 <p>{item.name}</p>
                 <div className="details">
-                    <p className="price">מחיר: <span>₪</span>{item.price}</p>
+                    {user.isAdmin && <p className="price">מחיר: <span>₪</span>{item.price}</p>}
                     <label className="qty-label" htmlFor="qty">כמות:
                         <select name="qty" id="qty" className="qty" value={user.cart[item._id]} onChange={(ev) => onChangeAmount(item._id, ev)}>
                             <option value={1}>1</option>

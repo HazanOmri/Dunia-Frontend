@@ -11,6 +11,12 @@
         padding-inline-end: 40px;
     }
 
+    .decription{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
     .actions {
         margin: 20px 0;
         display: flex;

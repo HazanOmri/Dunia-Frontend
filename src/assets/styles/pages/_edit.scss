@@ -1,4 +1,6 @@
 .edit {
+    position: relative;
+
     .edit-container {
         display: flex;
         gap: 20px;
@@ -8,7 +10,11 @@
             display: flex;
             flex-direction: column;
             width: 50%;
+            gap: 10px;
+        }
 
+        form>* {
+            @include edit-input;
         }
 
         textarea {
@@ -30,28 +36,83 @@
         }
     }
 
+    .save {
+        @include button;
+        background-color: $cta;
+    }
+
+    .save:hover {
+        background-color: lighten($cta, 10%);
+    }
+
+    .delete {
+        @include button;
+        background-color: #ff5c58;
+    }
+
+    .delete:hover {
+        background-color: lighten(#ff5c58, 10%);
+    }
+
     .actions {
         display: flex;
         gap: 15px;
         align-items: center;
         margin-top: 10px;
+    }
 
-        .save {
-            @include button;
-            background-color: $cta;
+    .mdoal {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: $clr1;
+        border: 0.5px solid black;
+        box-shadow: 0 2px 9px 0 rgb(0 0 0 / 10%);
+        width: 300px;
+        padding: 0 10px 10px 0;
+        height: fit-content;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+
+        h1 {
+            margin: 10px;
+            text-align: center;
         }
 
-        .save:hover {
-            background-color: lighten($cta, 10%);
-        }
-        
-        .delete {
-            @include button;
-            background-color: #ff5c58;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: space-evenly;
+
+        >* {
+            width: 100px;
         }
 
-        .delete:hover {
-            background-color: lighten(#ff5c58, 10%);
+    }
+
+    .cancel {
+        border: none;
+
+        &:hover {
+            background-color: darken($clr1, 20%);
+        }
+    }
+
+    .closeModal {
+        width: fit-content;
+        padding: 3px;
+        align-items: center;
+        display: flex;
+        align-self: flex-end;
+        background-color: darken($clr1, 10%);
+
+        &:hover {
+            background-color: darken($clr1, 20%);
+            cursor: pointer;
         }
     }
 }

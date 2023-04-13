@@ -1,7 +1,7 @@
 export const SET_FILTER = 'SET_FILTER'
 
 const initialState = {
-    filter: { txt: '', price: 500 },
+    filter: { name: '', price: 1000 },
 }
 
 

@@ -15,7 +15,6 @@ const initialState = {
 
 export function userReducer(state = initialState, action) {
     let user = { ...state.user }
-    console.log('user', user)
     switch (action.type) {
         case SET_USER:
             userService.saveLocalUser(action.user)
@@ -38,7 +37,7 @@ export function userReducer(state = initialState, action) {
                     user.cart[action.itemId] = 1
                 }
             }
-            userService.saveLocalUser(user)
+            // userService.saveLocalUser(user)
             return { ...state, user }
         case REMOVE_FROM_CART:
             let newCart = {}
@@ -46,7 +45,7 @@ export function userReducer(state = initialState, action) {
                 if (action.itemId !== itemId) newCart[itemId] = user.cart[itemId]
             }
             user.cart = newCart
-            userService.saveLocalUser(user)
+            // userService.saveLocalUser(user)
             showRemoveItemMsg('הפריט הוסר מהסל')
             return { ...state, user }
         default:
