@@ -4,21 +4,34 @@
     max-width: 960px;
     justify-self: center;
 
+    @media (max-width: $mobile-size) {
+        flex-direction: column;
+    }
+
     .img-container {
         display: flex;
         max-height: 76vh;
         max-width: 50%;
-        padding-inline-end: 40px;
+        margin-inline-end: 40px;
+
+        @media (max-width: $mobile-size) {
+            max-width: 100%;
+            max-height: 70%;
+            margin: 0;
+        }
     }
 
     .decription{
         display: flex;
         flex-direction: column;
         gap: 25px;
+
+        @media (max-width: $mobile-size) {
+            gap: 10px;
+        }
     }
 
     .actions {
-        margin: 20px 0;
         display: flex;
         gap: 10px;
         align-items: center;

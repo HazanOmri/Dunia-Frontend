@@ -1,5 +1,5 @@
 .user-msg {
-    background-color: rgb(64, 109, 222); //צבע טוב לליק, להוסיך צבע אפרפר לאנלייק
+    background-color: rgb(64, 109, 222);
     display: flex;
     justify-content: center;
     padding: .7em 1em;
@@ -10,6 +10,12 @@
     left: 20px;
     color: $clr1;
     font-size: 14px;
+
+    @media (max-width: $mobile-size) {
+        font-size: 0.8em;
+        top: 50px;
+        left: 7px;
+    }
 }
 
 .user-msg.error {

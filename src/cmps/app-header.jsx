@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { setFilter } from '../store/item.action';
@@ -5,6 +6,8 @@ import { setFilter } from '../store/item.action';
 export function AppHeader() {
     const filter = useSelector(storeState => storeState.itemModule.filter)
     const user = useSelector(storeState => storeState.userModule.user)
+    const elBtnRef = useRef(null)
+    const elScreenRef = useRef(null)
 
     function handleChange({ target }) {
         setFilter({ ...filter, name: target.value })
@@ -16,6 +19,17 @@ export function AppHeader() {
             sum += user.cart[item]
         }
         return sum
+    }
+
+    function toggleMenu({ target }) {
+        console.log(target.className)
+        if (target.className === 'toggle-menu-btn') {
+            elBtnRef.current = target
+            if (!elScreenRef.current) elScreenRef.current = document.querySelector('.toggle-menu-screen')
+            elScreenRef.current.classList.toggle('close-nav')
+        } else elScreenRef.current.classList.toggle('close-nav')
+        elBtnRef.current.classList.toggle('hide-btn')
+        document.querySelector('ul').classList.toggle('open')
     }
 
     return <section className="app-header-container full main-app">
@@ -65,7 +79,9 @@ export function AppHeader() {
                         </NavLink>
                     </li>
                 </ul>
+                <button className="toggle-menu-btn" onClick={toggleMenu}>תפריט</button>
             </nav>
+            <div className="toggle-menu-screen" onClick={toggleMenu}></div>
         </div>
     </section>
 }

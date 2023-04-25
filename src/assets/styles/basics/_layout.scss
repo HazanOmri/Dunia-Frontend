@@ -1,3 +1,9 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .main-app {
     display: grid;
     grid-template-columns: 20px 1fr 20px;
@@ -10,9 +16,16 @@
     .full {
         grid-column: 1/-1;
     }
+
+    @media (max-width: $mobile-size) {
+        grid-template-columns: 7px 1fr 7px;
+    }
 }
 
-main{
+main {
     padding-top: 74px;
-    min-height: 88.4vh;
+
+    @media (max-width: $mobile-size) {
+        padding-top: 54px;
+    }
 }

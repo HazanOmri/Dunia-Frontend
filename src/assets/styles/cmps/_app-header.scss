@@ -3,13 +3,43 @@
     direction: rtl;
     position: fixed;
     width: 100%;
-    z-index: 99;
-
+    
     .app-header {
         display: flex;
         align-items: center;
-        // text-align: center;
         justify-content: space-between;
+    }
+
+    .toggle-menu-btn {
+        display: none;
+
+        @media (max-width: $mobile-size) {
+            display: flex;
+        }
+    }
+
+    .toggle-menu-btn.hide-btn {
+        opacity: 0;
+    }
+
+    .toggle-menu-screen {
+        display: block;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        background: rgba(42, 42, 42, 0.6);
+        z-index: 4;
+        opacity: 0.5;
+        visibility: hidden; 
+        cursor: pointer;
+        transition: opacity .5s;
+    }
+
+    .toggle-menu-screen.close-nav {
+        visibility: visible;
+        opacity: 1;
     }
 
     a.logo {
@@ -19,6 +49,10 @@
         height: 100%;
         align-items: center;
         letter-spacing: 8px;
+
+        @media (max-width: $mobile-size) {
+            font-size: 36px;
+        }
     }
 
     ul {
@@ -26,7 +60,23 @@
         display: flex;
         margin: 0;
         padding: 0;
-        // font-size: 1px;
+        z-index: 5;
+
+        @media (max-width: $mobile-size) {
+            position: fixed;
+            flex-direction: column;
+            transform: translate(-100%, 0);
+            background-color: $clr2;
+            visibility: hidden;
+        }
+    }
+
+    .open {
+        transform: translate(0, 0);
+        visibility: visible;
+        left: 0;
+        top: 0;
+        height: 100vh;
     }
 
     li {
@@ -60,8 +110,8 @@
     nav {
         display: flex;
         direction: ltr;
-        align-self: flex-start;
     }
+
 
     input {
         background-color: $clr2;
@@ -71,6 +121,10 @@
         border-radius: 10px;
         padding: 10px;
         font-size: 18px;
+
+        @media (max-width: $mobile-size) {
+            width: 100px;
+        }
 
         &::placeholder {
             color: rgba(0, 0, 0, 0.700);
