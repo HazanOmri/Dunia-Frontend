@@ -8,6 +8,9 @@
     header {
         font-size: 45px;
         font-weight: bold;
+        @media (max-width: $mobile-size) {
+            font-size: 40px;
+        }
     }
     
     h2{

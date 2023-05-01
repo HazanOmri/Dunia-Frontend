@@ -8,6 +8,8 @@ export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const elBtnRef = useRef(null)
     const elScreenRef = useRef(null)
+    const elUlRef = useRef(null)
+    const elImgInputRef = useRef(null)
 
     function handleChange({ target }) {
         setFilter({ ...filter, name: target.value })
@@ -21,15 +23,18 @@ export function AppHeader() {
         return sum
     }
 
-    function toggleMenu({ target }) {
-        console.log(target.className)
-        if (target.className === 'toggle-menu-btn') {
-            elBtnRef.current = target
-            if (!elScreenRef.current) elScreenRef.current = document.querySelector('.toggle-menu-screen')
-            elScreenRef.current.classList.toggle('close-nav')
-        } else elScreenRef.current.classList.toggle('close-nav')
+    function toggleMenu() {
+        if (!elBtnRef.current) elBtnRef.current = document.querySelector('.toggle-menu-btn')
+        if (!elScreenRef.current) elScreenRef.current = document.querySelector('.toggle-menu-screen')
+        if (!elUlRef.current) elUlRef.current = document.querySelector('ul')
         elBtnRef.current.classList.toggle('hide-btn')
-        document.querySelector('ul').classList.toggle('open')
+        elScreenRef.current.classList.toggle('close-nav')
+        elUlRef.current.classList.toggle('open')
+        let elImgInput = document.querySelector('.input-img-container')
+        let elCatInput = document.querySelector('.multi-selector')
+        if (elImgInput) elImgInput.classList.toggle('to-back')
+        if (elCatInput) elCatInput.classList.toggle('to-back')
+
     }
 
     return <section className="app-header-container full main-app">
@@ -71,7 +76,7 @@ export function AppHeader() {
                     </li>
                     <li>
                         <NavLink to="/about">
-                            <svg fill="#000000" version="1.1" id="Capa_1" width="24px" height="24px" viewBox="0 0 416.979 416.979">
+                            <svg fill="#000000" width="24px" height="24px" viewBox="0 0 416.979 416.979">
                                 <g>
                                     <path d="M356.004,61.156c-81.37-81.47-213.377-81.551-294.848-0.182c-81.47,81.371-81.552,213.379-0.181,294.85   c81.369,81.47,213.378,81.551,294.849,0.181C437.293,274.636,437.375,142.626,356.004,61.156z M237.6,340.786   c0,3.217-2.607,5.822-5.822,5.822h-46.576c-3.215,0-5.822-2.605-5.822-5.822V167.885c0-3.217,2.607-5.822,5.822-5.822h46.576   c3.215,0,5.822,2.604,5.822,5.822V340.786z M208.49,137.901c-18.618,0-33.766-15.146-33.766-33.765   c0-18.617,15.147-33.766,33.766-33.766c18.619,0,33.766,15.148,33.766,33.766C242.256,122.755,227.107,137.901,208.49,137.901z" />
                                 </g>
@@ -79,7 +84,14 @@ export function AppHeader() {
                         </NavLink>
                     </li>
                 </ul>
-                <button className="toggle-menu-btn" onClick={toggleMenu}>תפריט</button>
+                <button className="toggle-menu-btn" onClick={toggleMenu}>
+                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24.75 24.75" >
+                        <g>
+                            <path d="M0,3.875c0-1.104,0.896-2,2-2h20.75c1.104,0,2,0.896,2,2s-0.896,2-2,2H2C0.896,5.875,0,4.979,0,3.875z M22.75,10.375H2   c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h20.75c1.104,0,2-0.896,2-2C24.75,11.271,23.855,10.375,22.75,10.375z M22.75,18.875H2   c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z" />
+                        </g>
+                    </svg>
+                    {/* תפריט */}
+                </button>
             </nav>
             <div className="toggle-menu-screen" onClick={toggleMenu}></div>
         </div>

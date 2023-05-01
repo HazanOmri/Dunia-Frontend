@@ -1,32 +1,42 @@
 .edit {
-    position: relative;
-
     .edit-container {
         display: flex;
         gap: 20px;
-        max-height: 70vh;
 
-        form {
-            display: flex;
+        @media (max-width: $mobile-size) {
             flex-direction: column;
-            width: 50%;
-            gap: 10px;
         }
+    }
 
-        form>* {
-            @include edit-input;
-        }
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 10px;
 
-        textarea {
-            flex: 1;
-            font-family: Arial, Helvetica, sans-serif;
+        @media (max-width: $mobile-size) {
+            width: 100%;
         }
+    }
+
+    form>* {
+        @include edit-input;
+    }
+
+    textarea {
+        flex: 1;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .input-img-container {
         position: relative;
         display: flex;
         width: 50%;
+        margin-top: 10px;
+
+        @media (max-width: $mobile-size) {
+            width: 100%;
+        }
 
         input {
             opacity: 0;
@@ -114,5 +124,9 @@
             background-color: darken($clr1, 20%);
             cursor: pointer;
         }
+    }
+
+    .to-back{
+        z-index: -1;
     }
 }

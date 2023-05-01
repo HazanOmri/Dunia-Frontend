@@ -3,7 +3,7 @@
     direction: rtl;
     position: fixed;
     width: 100%;
-    
+
     .app-header {
         display: flex;
         align-items: center;
@@ -15,11 +15,14 @@
 
         @media (max-width: $mobile-size) {
             display: flex;
+            background-color: $clr2;
+            border: none;
         }
     }
 
     .toggle-menu-btn.hide-btn {
         opacity: 0;
+        visibility: hidden;
     }
 
     .toggle-menu-screen {
@@ -32,7 +35,7 @@
         background: rgba(42, 42, 42, 0.6);
         z-index: 4;
         opacity: 0.5;
-        visibility: hidden; 
+        visibility: hidden;
         cursor: pointer;
         transition: opacity .5s;
     }
